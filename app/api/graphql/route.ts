@@ -76,13 +76,7 @@ const server = new ApolloServer({
   resolvers,
 });
 
-type Context = {
-  req: NextRequest;
-};
-
-const handler = startServerAndCreateNextHandler<Context>(server, {
-  context: async (req) => ({ req }),
-});
+const handler = startServerAndCreateNextHandler(server);
 
 export async function GET(request: NextRequest) {
   return handler(request);
