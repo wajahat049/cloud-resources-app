@@ -6,7 +6,7 @@ type CloudResource = {
   status: string;
 };
 
-let resources: CloudResource[] = [
+const resources: CloudResource[] = [
   { id: "1", name: "AWS EC2", type: "Compute", status: "active" },
   {
     id: "2",
