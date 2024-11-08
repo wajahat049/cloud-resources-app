@@ -76,8 +76,25 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const handler = startServerAndCreateNextHandler(server, {
-  context: async (req: NextRequest) => ({ req }),
+// Define the context type
+type Context = {
+  req: NextRequest;
+};
+
+const handler = startServerAndCreateNextHandler<Context>(server, {
+  context: async (req) => ({ req }),
 });
 
-export { handler as GET, handler as POST };
+export async function GET(
+  request: NextRequest,
+  context: { params: Record<string, string | string[]> }
+) {
+  return handler(request);
+}
+
+export async function POST(
+  request: NextRequest,
+  context: { params: Record<string, string | string[]> }
+) {
+  return handler(request);
+}
