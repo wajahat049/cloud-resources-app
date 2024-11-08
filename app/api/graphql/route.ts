@@ -3,7 +3,7 @@ import { CloudResource, resources } from "@/lib/constants";
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { PubSub } from "graphql-subscriptions";
-import { gql } from "graphql-tag"; // Use `graphql-tag` directly for typeDefs in backend
+import { gql } from "graphql-tag";
 
 const pubsub = new PubSub();
 const RESOURCE_UPDATED = "RESOURCE_UPDATED";
@@ -74,6 +74,10 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const handler = startServerAndCreateNextHandler(server);
+const handler = startServerAndCreateNextHandler(server, {
+  context: async (req, res) => ({ req, res }),
+});
 
-export { handler as GET, handler as POST }; // Support GET and POST
+// Default export with request method handling
+export const GET = handler;
+export const POST = handler;
