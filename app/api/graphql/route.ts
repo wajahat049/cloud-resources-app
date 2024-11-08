@@ -8,6 +8,13 @@ import { NextRequest } from "next/server";
 const pubsub = new PubSub();
 const RESOURCE_UPDATED = "RESOURCE_UPDATED";
 
+type UpdateResourceArgs = {
+  id: string;
+  name?: string;
+  type?: string;
+  status?: string;
+};
+
 const typeDefs = gql`
   type CloudResource {
     id: ID!
@@ -142,8 +149,12 @@ const resolvers = {
     },
   },
   Mutation: {
-    updateResource: (_: unknown, { id, name, type, status }: any) => {
-      return { id, name, type, status }; // Dummy mutation
+    updateResource: (
+      _: unknown,
+      { id, name, type, status }: UpdateResourceArgs
+    ) => {
+      // Dummy mutation logic for now
+      return { id, name, type, status };
     },
   },
   Subscription: {
