@@ -34,7 +34,21 @@ const RESOURCE_UPDATED = gql`
   }
 `;
 
-const Search = ({ search, setSearch, filter, setFilter, handleSearch }) => {
+type SearchProps = {
+  search: string;
+  setSearch: (value: string) => void;
+  filter: string;
+  setFilter: (value: string) => void;
+  handleSearch: () => void;
+};
+
+const Search: React.FC<SearchProps> = ({
+  search,
+  setSearch,
+  filter,
+  setFilter,
+  handleSearch,
+}) => {
   return (
     <div className="mb-4 flex flex-col md:flex-row items-center justify-between gap-4">
       <div className="w-full">
