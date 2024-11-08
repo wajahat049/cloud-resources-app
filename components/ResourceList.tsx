@@ -96,7 +96,7 @@ const ResourceList = () => {
         client.cache.modify({
           fields: {
             getCloudResources(existingResources = []) {
-              return existingResources.map((res) =>
+              return existingResources.map((res: { __ref: string }) =>
                 res.__ref === `CloudResource:${updatedResource.id}`
                   ? { ...res, ...updatedResource }
                   : res
